@@ -1,0 +1,13 @@
+name: EldoriaBase
+description: $description
+version: '${version}'
+
+main: me.chaos.eldoriaBase.Main
+paperPluginLoader: me.chaos.eldoriaBase.MainLoader
+api-version: '26.2'
+load: POSTWORLD
+
+authors: [ Chaos ]
+
+depend:
+  - "Multiverse-Core"

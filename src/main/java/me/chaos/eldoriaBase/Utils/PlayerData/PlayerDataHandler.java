@@ -8,7 +8,7 @@ import java.util.Map;
 public class PlayerDataHandler {
     Map<Player, PlayerData> PlayerMap = new HashMap<>();
 
-    public PlayerData getData(Player player){
+    public PlayerData getPlayerData(Player player){
         return PlayerMap.get (player);
     }
 
@@ -17,6 +17,6 @@ public class PlayerDataHandler {
     }
 
     public void saveData(Player player){
-        getData (player).saveDataToFile (player);
+        getPlayerData (player).saveDataToFile (player);
     }
 }

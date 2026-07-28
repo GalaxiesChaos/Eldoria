@@ -13,9 +13,19 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:26.2.build.+")
-    compileOnly("org.mvplugins.multiverse.core:multiverse-core:5.7.2")
-    paperweight.paperDevBundle("26.1.2.build.+")
 
+    //MultiVerse
+    compileOnly("org.mvplugins.multiverse.core:multiverse-core:5.7.2")
+
+    //Minecraft API
+    paperweight.paperDevBundle("26.2.build.+")
+
+    //Luckyperms
+    compileOnly("net.luckperms:api:5.5")
+
+    //Plotsquared implementation
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.56"))
+    compileOnly("com.intellectualsites.plotsquared:plotsquared-core")
 
 
 }

@@ -11,7 +11,7 @@ public interface PlayerDataHolder {
     String getSaveKey();
 
     default void append (Main main, Player player){
-        main.getHandler ().getPlayerDataHandler ().getData (player).append (this);
+        main.getHandler ().getPlayerDataHandler ().getPlayerData (player).append (this);
     }
 
 }

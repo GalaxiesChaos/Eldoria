@@ -22,7 +22,7 @@ public class WarpPoint {
     }
 
     public LocationCodecHelper getWarpLocationCODEC ( ) {
-        return (LocationCodecHelper) WarpLocation;
+        return new LocationCodecHelper(WarpLocation);
     }
 
     public String getId ( ) {
@@ -38,7 +38,7 @@ public class WarpPoint {
     private WarpPoint(LocationCodecHelper loc, String ID){
         this.world = loc.getWorld ();
         this.Id = ID;
-        this.WarpLocation = loc.getLocation ();
+        this.WarpLocation = loc.toLocation ();
     }
 
     public static Codec<WarpPoint> CODEC = RecordCodecBuilder.create (instance -> instance.group (

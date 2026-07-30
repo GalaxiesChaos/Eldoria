@@ -5,19 +5,27 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 public class LocationCodecHelper extends Location {
-    World world;
 
-    public LocationCodecHelper(String World, int x, int y, int z){
-        super(Bukkit.getWorld (World),x,y,z);
-        world = Bukkit.getWorld (World);
+    public LocationCodecHelper(World world, double x, double y, double z) {
+        super(world, x, y, z);
     }
 
-   public String getWorldName(){
-        return world.getName ();
-   }
-
-    public Location getLocation(){
-        return this.toLocation (world);
+    public LocationCodecHelper(Location loc){
+        super(loc.getWorld(),loc.getX(),loc.getY(),loc.getZ());
     }
+
+    public String getWorldName() {
+        return getWorld().getName();
+
+    }
+
+    public LocationCodecHelper(String world, double x, double y, double z) {
+        super(Bukkit.getWorld(world), x, y, z);
+    }
+
+    public Location toLocation() {
+      return new Location(getWorld(),getX(),getY(),getZ());
+    }
+
 
 }

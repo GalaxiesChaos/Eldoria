@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public interface DataHolder {
     String CONFIG_PATH = "./config/Eldoria";
-    String PLAYER_PATH = "./config/Eldoria/Players";
+    String PLAYER_PATH = "./config/Eldoria/Players/";
 
 
     default void WriteConfig (JsonElement data){

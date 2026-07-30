@@ -1,8 +1,9 @@
 package me.chaos.eldoriaBase.Listeners;
 
+import com.google.gson.JsonElement;
 import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.Utils.DataHolder;
-import me.chaos.eldoriaBase.Utils.PlayerData.PlayerData;
+import me.chaos.eldoriaBase.PlayerData.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,7 +24,15 @@ public class PlayerJoinListener implements Listener {
     }
 
     public void loadPlayerData(Player player){
-        PlayerData data = new PlayerData (DataHolder.ReadPlayer (player));
+        JsonElement json = DataHolder.ReadPlayer(player);
+        PlayerData data;
+
+
+        if (json.getAsJsonObject().isEmpty()){
+            data = new PlayerData(player, main);
+
+        } else data = new PlayerData (json);
+
         main.getHandler ().getPlayerDataHandler ().addData (player,data);
     }
 }

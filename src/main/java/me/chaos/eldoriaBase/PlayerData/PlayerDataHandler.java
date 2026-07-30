@@ -1,4 +1,4 @@
-package me.chaos.eldoriaBase.Utils.PlayerData;
+package me.chaos.eldoriaBase.PlayerData;
 
 import org.bukkit.entity.Player;
 

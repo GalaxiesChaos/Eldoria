@@ -1,9 +1,6 @@
 package me.chaos.eldoriaBase.Utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.*;
 
@@ -19,6 +16,11 @@ public class ReadWriteHandler {
     private static void WriteJson(String filePath, JsonElement data){
         try (FileWriter writer = new FileWriter (filePath);
              BufferedWriter bufferedWriter = new BufferedWriter (writer) ){
+            File file = new File(filePath);
+
+            if (!file.exists()){
+                file.mkdir();
+            }
 
             Gson gson = new GsonBuilder ().setPrettyPrinting ().create ();
             gson.toJson (data, bufferedWriter);
@@ -30,6 +32,10 @@ public class ReadWriteHandler {
 
     private static JsonElement ReadJson(String filePath)  {
         File file = new File (filePath);
+
+        if(!file.exists()){
+            return new JsonObject();
+        }
 
 
         try (FileReader reader = new FileReader (filePath);

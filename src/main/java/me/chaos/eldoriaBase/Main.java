@@ -1,8 +1,13 @@
 package me.chaos.eldoriaBase;
 
+import me.chaos.EldoriaCash.Interface.BankCommand;
+import me.chaos.EldoriaCash.OnClickEvent;
+import me.chaos.EldoriaCash.PlayerBank;
+import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.eldoriaBase.Listeners.PlayerJoinListener;
 import me.chaos.eldoriaBase.Listeners.PlayerQuitListener;
-import me.chaos.eldoriaBase.Utils.PlayerData.PlayerDataRegistry;
+import me.chaos.eldoriaBase.PlayerData.PlayerDataRegistry;
+import me.chaos.eldoriaBase.Utils.SignInputListener;
 import me.chaos.eldoriaBase.WarpCommand.WarpCommand;
 import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
@@ -20,18 +25,34 @@ public final class Main extends JavaPlugin {
 
         registerPlayerData ();
         registerListeners ();
-        registerCommand (
-                "Warp", new WarpCommand (this)
-        );
+        registerCommands();
+        registerPlayerDataCodec();
+
     }
 
     public void registerListeners(){
         Bukkit.getPluginManager ().registerEvents (new PlayerQuitListener (this),this);
         Bukkit.getPluginManager ().registerEvents (new PlayerJoinListener (this),this);
+        Bukkit.getPluginManager ().registerEvents (new OnClickEvent(this),this);
+        Bukkit.getPluginManager ().registerEvents (new SignInputListener(this), this);
     }
 
-    public void registerPlayerData(){
+    public void registerPlayerDataCodec(){
         PlayerDataRegistry.register (WarpPlayerManager.SAVE_KEY, WarpPlayerManager.CODEC);
+        PlayerDataRegistry.register(PlayerMoney.SAVE_KEY, PlayerMoney.CODEC);
+        PlayerDataRegistry.register(PlayerBank.SAVE_KEY, PlayerBank.CODEC);
+    }
+
+    private void registerPlayerData(){
+        PlayerDataRegistry.register(new WarpPlayerManager());
+        PlayerDataRegistry.register(new PlayerBank());
+        PlayerDataRegistry.register(new PlayerMoney());
+
+    }
+
+    private void registerCommands(){
+        registerCommand ("warp", new WarpCommand (this));
+        registerCommand("bank", new BankCommand());
     }
 
     @Override

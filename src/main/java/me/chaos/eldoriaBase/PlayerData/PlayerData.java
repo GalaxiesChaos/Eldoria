@@ -1,10 +1,14 @@
-package me.chaos.eldoriaBase.Utils.PlayerData;
+package me.chaos.eldoriaBase.PlayerData;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import me.chaos.EldoriaCash.PlayerBank;
+import me.chaos.EldoriaCash.PlayerMoney;
+import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.Utils.DataHolder;
+import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,6 +17,14 @@ import java.util.List;
 
 public class PlayerData implements DataHolder {
     List<PlayerDataHolder> PlayerDataList = new ArrayList<> (  );
+
+
+    public PlayerData(Player player, Main main){
+        for (PlayerDataHolder dataHolder : PlayerDataRegistry.getDataList()){
+            dataHolder.append(main,player);
+        }
+    }
+
 
     public PlayerData(JsonElement data){
         if (data == null || !data.isJsonObject ()) return;
@@ -53,5 +65,25 @@ public class PlayerData implements DataHolder {
         }
         return data;
     }
+
+    public PlayerMoney getMoney( ){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof PlayerMoney){
+                return (PlayerMoney) dataHolder;
+            }
+        }
+        return null;
+    }
+
+    public PlayerBank getBank( ){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof PlayerBank){
+                return (PlayerBank) dataHolder;
+            }
+        }
+
+        return null;
+    }
+
 
 }

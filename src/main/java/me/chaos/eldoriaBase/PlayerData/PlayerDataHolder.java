@@ -1,8 +1,10 @@
-package me.chaos.eldoriaBase.Utils.PlayerData;
+package me.chaos.eldoriaBase.PlayerData;
 
 import com.google.gson.JsonElement;
 import me.chaos.eldoriaBase.Main;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public interface PlayerDataHolder {
 
@@ -15,4 +17,3 @@ public interface PlayerDataHolder {
     }
 
 }
-

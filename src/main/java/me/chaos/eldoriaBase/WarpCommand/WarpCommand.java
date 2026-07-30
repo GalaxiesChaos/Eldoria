@@ -4,6 +4,7 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.WarpCommand.WarpExeptiosn.NotEnoughWarpsExeption;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
@@ -27,7 +28,7 @@ public class WarpCommand implements BasicCommand {
 
         if(stack.getExecutor () instanceof Player player){
             switch (Action){
-                case "to","To","TO,tO" :  {
+                case "to","To","TO,tO" ->  {
                     if (handler.containsWarp (value,player)){
                         player.teleport (handler.getWarpmanager (player).getWarp (value).getWarpLocation ());
                     } else {
@@ -35,7 +36,7 @@ public class WarpCommand implements BasicCommand {
                     }
                 }
 
-                case "set", "Set", "SET" :{
+                case "set", "Set", "SET" -> {
                     try {
                         if (handler.containsWarp (value,player)){
                             player.sendMessage ("Dieser Warp exsistiert schon".formatted (ChatColor.RED));
@@ -52,7 +53,7 @@ public class WarpCommand implements BasicCommand {
                     }
                 }
 
-                case "addPublic", "AddPublic" : {
+                case "addPublic", "AddPublic" -> {
                     if (player.hasPermission ("*")) {
                         PublicWarp publicWarp = new PublicWarp ( );
                         publicWarp.add (new WarpPoint (player , value));
@@ -62,7 +63,12 @@ public class WarpCommand implements BasicCommand {
                     }
                 }
 
-                default: player.sendMessage (ChatColor.RED + Action + " ist keine Valide Eingabe");
+                default -> {
+                    if (player.hasPermission("*")){
+                        player.sendMessage(Component.text(Action + ", " + value));
+                    }
+                    player.sendMessage (ChatColor.RED + Action + " ist keine Valide Eingabe");
+                }
             }
         }
 
@@ -73,7 +79,7 @@ public class WarpCommand implements BasicCommand {
     public @NonNull Collection<String> suggest (@NonNull CommandSourceStack commandSourceStack , String @NonNull [] args) {
         if (commandSourceStack.getSender ( ) instanceof Player player) {
             switch (args.length) {
-                case 0: {
+                case 0 -> {
                     List<String> re = new ArrayList<> ( );
                     if (commandSourceStack.getExecutor ( ).hasPermission ("*")) {
                         re.add ("addPublic");
@@ -82,12 +88,14 @@ public class WarpCommand implements BasicCommand {
                     re.add ("to");
                     return re;
                 }
-                case 1: {
+                case 1 ->  {
 
                     return handler.getIds (player);
                 }
-                default:
+                default -> {
                     return Collections.singleton ("");
+                }
+
 
             }
         }

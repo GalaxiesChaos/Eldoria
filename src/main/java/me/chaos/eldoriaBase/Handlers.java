@@ -1,6 +1,6 @@
 package me.chaos.eldoriaBase;
 
-import me.chaos.eldoriaBase.Utils.PlayerData.PlayerDataHandler;
+import me.chaos.eldoriaBase.PlayerData.PlayerDataHandler;
 import me.chaos.eldoriaBase.WarpCommand.WarpHandler;
 
 public class Handlers {

@@ -5,12 +5,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.chaos.eldoriaBase.Main;
-import me.chaos.eldoriaBase.Utils.PlayerData.PlayerDataHolder;
+import me.chaos.eldoriaBase.PlayerData.PlayerDataHolder;
 import org.bukkit.entity.Player;
 
 
 public class PlayerBank implements PlayerDataHolder, Money {
     private int cash;
+    public static String SAVE_KEY = "Bank";
 
 
     private PlayerBank(int money){
@@ -21,6 +22,11 @@ public class PlayerBank implements PlayerDataHolder, Money {
         append(main,player);
         cash = money;
     }
+
+    public PlayerBank() {
+
+    }
+
     @Override
     public int getMoney() {
         return cash;
@@ -36,7 +42,7 @@ public class PlayerBank implements PlayerDataHolder, Money {
         return cash >= money;
     }
 
-    private final static Codec<PlayerBank> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public final static Codec<PlayerBank> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("Money").forGetter(PlayerBank::getMoney)
     ).apply(instance,PlayerBank::new));
 
@@ -47,6 +53,6 @@ public class PlayerBank implements PlayerDataHolder, Money {
 
     @Override
     public String getSaveKey() {
-        return "Bank";
+        return SAVE_KEY;
     }
 }

@@ -23,9 +23,7 @@ public class PlayerBank implements PlayerDataHolder, Money {
         cash = money;
     }
 
-    public PlayerBank() {
-
-    }
+    public PlayerBank() {}
 
     @Override
     public int getMoney() {

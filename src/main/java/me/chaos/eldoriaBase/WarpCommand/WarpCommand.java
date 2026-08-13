@@ -22,13 +22,22 @@ public class WarpCommand implements BasicCommand {
 
     @Override
     public void execute (CommandSourceStack stack, String[] args) {
+        String Action;
+        String value;
 
-        String Action = args[0];
-        String value = args[1];
 
         if(stack.getExecutor () instanceof Player player){
+            if(args.length >= 2 ) {
+                Action = args[0];
+                value = args[1];
+            }
+            else{
+                player.sendMessage("Falsche Command Länge");
+                return;
+            }
+
             switch (Action){
-                case "to","To","TO,tO" ->  {
+                case "to","To","TO","tO" ->  {
                     if (handler.containsWarp (value,player)){
                         player.teleport (handler.getWarpmanager (player).getWarp (value).getWarpLocation ());
                     } else {
@@ -56,6 +65,14 @@ public class WarpCommand implements BasicCommand {
                 case "addPublic", "AddPublic" -> {
                     if (player.hasPermission ("*")) {
                         PublicWarp publicWarp = new PublicWarp ( );
+
+                        for (String id : handler.getWarpmanager(player).getIds()){
+                            if (value.equalsIgnoreCase(id)){
+                                player.sendMessage("Dieser Warp exsistiert schon");
+                                return;
+                            }
+                        }
+
                         publicWarp.add (new WarpPoint (player , value));
                         publicWarp.SaveToFile ( );
 

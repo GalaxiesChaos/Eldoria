@@ -44,9 +44,9 @@ public final class Main extends JavaPlugin {
     }
 
     private void registerPlayerData(){
-        PlayerDataRegistry.register(new WarpPlayerManager());
-        PlayerDataRegistry.register(new PlayerBank());
-        PlayerDataRegistry.register(new PlayerMoney());
+        PlayerDataRegistry.register(WarpPlayerManager::new);
+        PlayerDataRegistry.register(PlayerBank::new);
+        PlayerDataRegistry.register(PlayerMoney::new);
 
     }
 

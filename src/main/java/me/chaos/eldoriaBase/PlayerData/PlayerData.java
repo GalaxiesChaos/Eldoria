@@ -6,22 +6,21 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
-import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.Utils.DataHolder;
-import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class PlayerData implements DataHolder {
     List<PlayerDataHolder> PlayerDataList = new ArrayList<> (  );
 
 
-    public PlayerData(Player player, Main main){
-        for (PlayerDataHolder dataHolder : PlayerDataRegistry.getDataList()){
-            dataHolder.append(main,player);
+    public PlayerData(){
+        for (Supplier<? extends PlayerDataHolder> dataHolder : PlayerDataRegistry.getDataList()){
+            this.append(dataHolder.get());
         }
     }
 
@@ -46,6 +45,25 @@ public class PlayerData implements DataHolder {
                 Bukkit.getLogger ().warning ("Fehler beim Laden von PlayerData '" + key + "': " + e.getMessage ());
             }
         }
+
+        for (Supplier<? extends PlayerDataHolder> factory : PlayerDataRegistry.getDataList ()) {
+            PlayerDataHolder fresh = factory.get ();
+            boolean alreadyPresent = false;
+
+            for (PlayerDataHolder existing : PlayerDataList) {
+                if (existing.getSaveKey ().equals (fresh.getSaveKey ())) {
+                    alreadyPresent = true;
+                    break;
+                }
+            }
+
+            if (!alreadyPresent) {
+                append(fresh);
+            }
+        }
+
+
+
     }
 
     public void append(PlayerDataHolder dataHolder){

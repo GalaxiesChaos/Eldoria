@@ -12,31 +12,32 @@ import java.util.List;
 import java.util.Set;
 
 public class PublicWarp implements DataHolder {
-    private Set<WarpPoint> PublicWarps = new HashSet<> (  );
+    private Set<WarpPoint> publicWarps = new HashSet<> (  );
 
     public List<WarpPoint> getPublicWarps(){
-        return PublicWarps.stream ( ).toList ( );
+        return publicWarps.stream ( ).toList ( );
     }
 
     public void add(WarpPoint point){
-        PublicWarps.add (point);
+        publicWarps.add (point);
     }
 
     public void SaveToFile(){
         WriteConfig (CODEC.encodeStart (JsonOps.INSTANCE , this).getOrThrow ());
     }
 
-    public static void loadFromFile(){
-        CODEC.parse (JsonOps.INSTANCE, DataHolder.ReadConfig ());
+    public void loadFromFile(){
+        CODEC.parse(JsonOps.INSTANCE, DataHolder.ReadConfig())
+                .resultOrPartial(System.err::println)
+                .ifPresent(loaded -> this.publicWarps = new HashSet<>(loaded.getPublicWarps()));
     }
 
-
     public PublicWarp(){
-        loadFromFile ();
+
     }
 
     private PublicWarp(List<WarpPoint> warps) {
-        PublicWarps = new HashSet<> (warps);
+        publicWarps = new HashSet<> (warps);
     }
 
     public static Codec<PublicWarp> CODEC = RecordCodecBuilder.create (instance -> instance.group (

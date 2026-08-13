@@ -14,13 +14,17 @@ public class ReadWriteHandler {
     }
 
     private static void WriteJson(String filePath, JsonElement data){
+        File file = new File(filePath);
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         try (FileWriter writer = new FileWriter (filePath);
              BufferedWriter bufferedWriter = new BufferedWriter (writer) ){
-            File file = new File(filePath);
-
-            if (!file.exists()){
-                file.mkdir();
-            }
 
             Gson gson = new GsonBuilder ().setPrettyPrinting ().create ();
             gson.toJson (data, bufferedWriter);

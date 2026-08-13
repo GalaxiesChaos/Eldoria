@@ -29,7 +29,7 @@ public class PlayerJoinListener implements Listener {
 
 
         if (json.getAsJsonObject().isEmpty()){
-            data = new PlayerData(player, main);
+            data = new PlayerData();
 
         } else data = new PlayerData (json);
 

@@ -34,7 +34,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
 
    public void addWarp(WarpPoint add) throws NotEnoughWarpsExeption {
        int size = 3;
-       if (current_size++ < size){
+       if (WarpList.size() < size){
            WarpList.add (add);
        } else {
            throw new NotEnoughWarpsExeption ("Nicht genug Warps vorhanden");

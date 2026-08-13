@@ -23,7 +23,7 @@ public class OnClickEvent implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if (event.getClickedInventory() instanceof BankInterfaceInv inv){
+        if (event.getClickedInventory() != null && event.getClickedInventory().getHolder() instanceof BankInterfaceInv inv){
             switch (event.getSlot()){
                 case 12 -> {
                     inputListener.promptForInteger(player, List.of("Bitte betrag eintragen"), value -> {

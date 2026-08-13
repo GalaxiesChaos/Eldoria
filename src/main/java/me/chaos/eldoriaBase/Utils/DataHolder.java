@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import org.bukkit.entity.Player;
 
 public interface DataHolder {
-    String CONFIG_PATH = "./config/Eldoria";
+    String CONFIG_PATH = "./config/Eldoria/";
     String PLAYER_PATH = "./config/Eldoria/Players/";
 
 

@@ -3,6 +3,7 @@ package me.chaos.EldoriaQuests;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public class Quest {
     private String Title;
     private final String id;
     Integer CashReward;
-    Integer XPReward;
+    Integer XpReward;
     Integer difficulty;
     List<String> description;
 
@@ -26,7 +27,7 @@ public class Quest {
         this.type = type;
         this.description = description;
         this.difficulty = difficulty;
-        this.XPReward = XPReward;
+        this.XpReward = XPReward;
         CashReward = cashReward;
         this.id = id;
         Title = title;
@@ -56,8 +57,8 @@ public class Quest {
         return difficulty;
     }
 
-    public Integer getXPReward() {
-        return XPReward;
+    public Integer getXpReward() {
+        return XpReward;
     }
 
     public Integer getCashReward() {
@@ -76,7 +77,7 @@ public class Quest {
             Codec.STRING.fieldOf("title").forGetter(Quest::getTitle),
             Codec.STRING.fieldOf("id").forGetter(Quest::getId),
             Codec.INT.fieldOf("CahsReward").forGetter(Quest::getCashReward),
-            Codec.INT.fieldOf("XPReward").forGetter(Quest::getXPReward),
+            Codec.INT.fieldOf("XpReward").forGetter(Quest::getXpReward),
             Codec.INT.fieldOf("difficulty").forGetter(Quest::getDifficulty),
             Codec.STRING.listOf().fieldOf("description").forGetter(Quest::getDescription),
             Codec.STRING.fieldOf("task").forGetter(Quest::getTaskType),
@@ -86,14 +87,14 @@ public class Quest {
     ).apply(instance,Quest::new));
 
 
-    public Quest(String title, String id, Integer cashReward, Integer xpReward, Integer difficulty,
+    public Quest(String title, String id, Integer cashReward, Integer XpReward, Integer difficulty,
                  List<String> description, String task, Integer goal, Integer progress, Map<String, String> meta) {
         this.goal = goal;
         this.meta = meta;
         this.type = getTypeFromString(task);
-        this.description = description;
+        this.description = new ArrayList<>(description);
         this.difficulty = difficulty;
-        this.XPReward = XPReward;
+        this.XpReward = XpReward;
         CashReward = cashReward;
         this.id = id;
         Title = title;

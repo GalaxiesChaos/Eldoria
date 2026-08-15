@@ -33,7 +33,7 @@ public class PublicWarp implements DataHolder {
     }
 
     public PublicWarp(){
-
+        loadFromFile();
     }
 
     private PublicWarp(List<WarpPoint> warps) {

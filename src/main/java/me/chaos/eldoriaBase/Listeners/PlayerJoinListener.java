@@ -34,5 +34,6 @@ public class PlayerJoinListener implements Listener {
         } else data = new PlayerData (json);
 
         main.getHandler ().getPlayerDataHandler ().addData (player,data);
+        main.getHandler().getWarpHandler().registerPlayer(player,data.getWarpManager());
     }
 }

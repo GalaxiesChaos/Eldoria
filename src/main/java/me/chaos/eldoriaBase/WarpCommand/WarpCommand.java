@@ -54,11 +54,9 @@ public class WarpCommand implements BasicCommand {
 
                         handler.getWarpmanager (player).addWarp (new WarpPoint (player, value));
                         player.sendMessage ("Warp hinzugefügt");
-                        return;
 
                     } catch (NotEnoughWarpsExeption e) {
                         player.sendMessage (e.getMessage ());
-                        return;
                     }
                 }
 
@@ -66,12 +64,15 @@ public class WarpCommand implements BasicCommand {
                     if (player.hasPermission ("*")) {
                         PublicWarp publicWarp = new PublicWarp ( );
 
-                        for (String id : handler.getWarpmanager(player).getIds()){
-                            if (value.equalsIgnoreCase(id)){
-                                player.sendMessage("Dieser Warp exsistiert schon");
-                                return;
+                        if (!(handler.getWarpmanager(player).isEmpty())) {
+                            for (String id : handler.getWarpmanager(player).getIds()) {
+                                if (value.equalsIgnoreCase(id)) {
+                                    player.sendMessage("Dieser Warp exsistiert schon");
+                                    return;
+                                }
                             }
                         }
+
 
                         publicWarp.add (new WarpPoint (player , value));
                         publicWarp.SaveToFile ( );
@@ -106,6 +107,9 @@ public class WarpCommand implements BasicCommand {
                     return re;
                 }
                 case 1 ->  {
+                    if(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("addPublic")){
+                        return Collections.singleton("");
+                    }
 
                     return handler.getIds (player);
                 }

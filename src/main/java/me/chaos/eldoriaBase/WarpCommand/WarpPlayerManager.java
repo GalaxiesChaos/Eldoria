@@ -23,6 +23,10 @@ public class WarpPlayerManager implements PlayerDataHolder {
 
     }
 
+    public boolean isEmpty(){
+        return WarpList.isEmpty();
+    }
+
     public WarpPoint getWarp(String ID) throws NullPointerException {
        for (WarpPoint point : WarpList){
            if (point.getId ().equalsIgnoreCase (ID)){
@@ -36,6 +40,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
        int size = 3;
        if (WarpList.size() < size){
            WarpList.add (add);
+           current_size++;
        } else {
            throw new NotEnoughWarpsExeption ("Nicht genug Warps vorhanden");
        }
@@ -73,7 +78,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
    }
 
    private WarpPlayerManager (List<WarpPoint> warps){
-       WarpList = warps;
+       WarpList = new ArrayList<>(warps);
    }
 
 

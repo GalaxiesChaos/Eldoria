@@ -7,6 +7,7 @@ import com.mojang.serialization.JsonOps;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.eldoriaBase.Utils.DataHolder;
+import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -103,5 +104,13 @@ public class PlayerData implements DataHolder {
         return null;
     }
 
+    public WarpPlayerManager getWarpManager(){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof WarpPlayerManager manager){
+                return manager;
+            }
+        }
 
+        return null;
+    }
 }

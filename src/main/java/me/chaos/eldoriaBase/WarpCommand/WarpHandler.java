@@ -10,7 +10,7 @@ public class WarpHandler {
     private Map<Player, WarpPlayerManager> WarpMap = new HashMap<> ();
 
     public void registerPlayer(Player player, List<WarpPoint> warps, Main main){
-        //Füge spieler eigene Warps Hinzu
+
         WarpPlayerManager manager = new WarpPlayerManager (player, main);
         for (WarpPoint warp : warps){
             try {
@@ -20,18 +20,35 @@ public class WarpHandler {
             }
         }
 
+
+        WarpMap.put (player,manager);
+
         //Add Public Warps zum Spieler
         loadPublic (player);
 
 
-        WarpMap.put (player,manager);
+
     }
+
+    public void registerPlayer(Player player, WarpPlayerManager manager){
+        WarpMap.put(player, manager);
+        loadPublic(player);
+    }
+
 
     public WarpPlayerManager getWarpmanager(Player player){
         return WarpMap.get (player);
     }
 
+    public boolean isEmpty(Player player){
+        return WarpMap.get(player).isEmpty();
+    }
+
     public boolean containsWarp(String ID, Player player){
+        if (!(WarpMap.containsKey(player))){
+            return false;
+        }
+
         return WarpMap.get (player).hasWarp (ID);
     }
 

@@ -13,24 +13,29 @@ public class ReadWriteHandler {
         return ReadJson (Path + ".json");
     }
 
-    private static void WriteJson(String filePath, JsonElement data){
+    private static void WriteJson(String filePath, JsonElement data) {
         File file = new File(filePath);
-        if (!file.exists()){
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
+
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
 
-        try (FileWriter writer = new FileWriter (filePath);
-             BufferedWriter bufferedWriter = new BufferedWriter (writer) ){
+            try (FileWriter writer = new FileWriter(filePath);
+                 BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
 
-            Gson gson = new GsonBuilder ().setPrettyPrinting ().create ();
-            gson.toJson (data, bufferedWriter);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(data, bufferedWriter);
 
-        } catch (IOException e) {
-            throw new RuntimeException (e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

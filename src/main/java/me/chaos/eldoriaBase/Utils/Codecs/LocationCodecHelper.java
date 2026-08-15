@@ -20,7 +20,7 @@ public class LocationCodecHelper extends Location {
     }
 
     public LocationCodecHelper(String world, double x, double y, double z) {
-        super(Bukkit.getWorld(world), x, y, z);
+        super(Bukkit.getWorld(world), x + 0.5, y + 0.1, z + 0.5);
     }
 
     public Location toLocation() {

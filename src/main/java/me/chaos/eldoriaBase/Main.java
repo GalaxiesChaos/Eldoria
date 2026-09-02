@@ -4,6 +4,7 @@ import me.chaos.EldoriaCash.Interface.BankCommand;
 import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
+import me.chaos.EldoriaQuests.RegisterHandlers;
 import me.chaos.eldoriaBase.Listeners.PlayerJoinListener;
 import me.chaos.eldoriaBase.Listeners.PlayerQuitListener;
 import me.chaos.eldoriaBase.PlayerData.PlayerDataRegistry;
@@ -28,6 +29,8 @@ public final class Main extends JavaPlugin {
         registerCommands();
         registerPlayerDataCodec();
 
+
+
     }
 
     public void registerListeners(){
@@ -41,6 +44,7 @@ public final class Main extends JavaPlugin {
         PlayerDataRegistry.register (WarpPlayerManager.SAVE_KEY, WarpPlayerManager.CODEC);
         PlayerDataRegistry.register(PlayerMoney.SAVE_KEY, PlayerMoney.CODEC);
         PlayerDataRegistry.register(PlayerBank.SAVE_KEY, PlayerBank.CODEC);
+
     }
 
     private void registerPlayerData(){

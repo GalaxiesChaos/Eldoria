@@ -11,3 +11,16 @@ authors: [ Chaos ]
 
 depend:
   - "Multiverse-Core"
+
+commands:
+  warp:
+    description: "Manage player warps (usage: /warp <to|set|addPublic> <id>)"
+    usage: /warp <to|set|addPublic> <id>
+    permission: eldoria.warp
+    permission-message: You do not have permission to use /warp
+  bank:
+    description: Bank commands (EldoriaCash integration)
+    usage: /bank
+    permission: eldoria.bank
+    permission-message: You do not have permission to use /bank
+

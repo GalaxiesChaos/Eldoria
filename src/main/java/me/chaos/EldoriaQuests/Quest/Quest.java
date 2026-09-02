@@ -1,4 +1,4 @@
-package me.chaos.EldoriaQuests;
+package me.chaos.EldoriaQuests.Quest;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -73,10 +73,10 @@ public class Quest {
         return Title;
     }
 
-    Codec<Quest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static Codec<Quest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("title").forGetter(Quest::getTitle),
             Codec.STRING.fieldOf("id").forGetter(Quest::getId),
-            Codec.INT.fieldOf("CahsReward").forGetter(Quest::getCashReward),
+            Codec.INT.fieldOf("CashReward").forGetter(Quest::getCashReward),
             Codec.INT.fieldOf("XpReward").forGetter(Quest::getXpReward),
             Codec.INT.fieldOf("difficulty").forGetter(Quest::getDifficulty),
             Codec.STRING.listOf().fieldOf("description").forGetter(Quest::getDescription),
@@ -102,10 +102,16 @@ public class Quest {
     }
 
 
-
-
     private TaskType getTypeFromString(String input){
         return TaskType.valueOf(input);
+    }
+
+    public TaskType getType(){
+        return type;
+    }
+
+    public void addProgress(int amount){
+        this.progress += amount;
     }
 
 }

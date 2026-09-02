@@ -6,6 +6,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
+import me.chaos.EldoriaQuests.PlayerQuestsManager;
+import me.chaos.EldoriaQuests.Quest.Quest;
 import me.chaos.eldoriaBase.Utils.DataHolder;
 import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
@@ -107,6 +109,16 @@ public class PlayerData implements DataHolder {
     public WarpPlayerManager getWarpManager(){
         for (PlayerDataHolder dataHolder : PlayerDataList){
             if (dataHolder instanceof WarpPlayerManager manager){
+                return manager;
+            }
+        }
+
+        return null;
+    }
+
+    public PlayerQuestsManager getPlayerQuestManager(){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof PlayerQuestsManager manager){
                 return manager;
             }
         }

@@ -1,7 +1,7 @@
 package me.chaos.EldoriaQuests.Quest;
 
 public enum TaskType {
-    COLLECT, KILL_ENTITY, DELIVER,
+    COLLECT, KILL_ENTITY
 
 }
 

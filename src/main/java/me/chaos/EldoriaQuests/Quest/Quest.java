@@ -73,7 +73,7 @@ public class Quest {
         return Title;
     }
 
-    public static Codec<Quest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<Quest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("title").forGetter(Quest::getTitle),
             Codec.STRING.fieldOf("id").forGetter(Quest::getId),
             Codec.INT.fieldOf("CashReward").forGetter(Quest::getCashReward),
@@ -87,7 +87,7 @@ public class Quest {
     ).apply(instance,Quest::new));
 
 
-    public Quest(String title, String id, Integer cashReward, Integer XpReward, Integer difficulty,
+    private Quest(String title, String id, Integer cashReward, Integer XpReward, Integer difficulty,
                  List<String> description, String task, Integer goal, Integer progress, Map<String, String> meta) {
         this.goal = goal;
         this.meta = meta;

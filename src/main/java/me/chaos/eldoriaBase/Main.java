@@ -4,6 +4,7 @@ import me.chaos.EldoriaCash.Interface.BankCommand;
 import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
+import me.chaos.EldoriaQuests.QuestCommand;
 import me.chaos.EldoriaQuests.RegisterHandlers;
 import me.chaos.eldoriaBase.Listeners.PlayerJoinListener;
 import me.chaos.eldoriaBase.Listeners.PlayerQuitListener;
@@ -28,6 +29,7 @@ public final class Main extends JavaPlugin {
         registerListeners ();
         registerCommands();
         registerPlayerDataCodec();
+        QuestLoader.loadQuests();
 
 
 
@@ -57,6 +59,7 @@ public final class Main extends JavaPlugin {
     private void registerCommands(){
         registerCommand ("warp", new WarpCommand (this));
         registerCommand("bank", new BankCommand());
+        registerCommand("quests",new QuestCommand());
     }
 
     @Override

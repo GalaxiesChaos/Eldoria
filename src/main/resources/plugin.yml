@@ -16,11 +16,13 @@ commands:
   warp:
     description: "Manage player warps (usage: /warp <to|set|addPublic> <id>)"
     usage: /warp <to|set|addPublic> <id>
-    permission: eldoria.warp
-    permission-message: You do not have permission to use /warp
+
   bank:
-    description: Bank commands (EldoriaCash integration)
+    description: Bank commands
     usage: /bank
-    permission: eldoria.bank
-    permission-message: You do not have permission to use /bank
+
+  quests:
+    description: Quest Menü öffnen
+    usage: /quest
+
 

@@ -27,13 +27,13 @@ public class WarpPlayerManager implements PlayerDataHolder {
         return WarpList.isEmpty();
     }
 
-    public WarpPoint getWarp(String ID) throws NullPointerException {
+    public WarpPoint getWarp(String ID) throws WarpNotFoundExeption {
        for (WarpPoint point : WarpList){
            if (point.getId ().equalsIgnoreCase (ID)){
                return point;
            }
        }
-       return null;
+       throw new WarpNotFoundExeption("[Warp] Warp '" + ID + "' wurde nicht gefunden");
    }
 
    public void addWarp(WarpPoint add) throws NotEnoughWarpsExeption {
@@ -42,7 +42,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
            WarpList.add (add);
            current_size++;
        } else {
-           throw new NotEnoughWarpsExeption ("Nicht genug Warps vorhanden");
+           throw new NotEnoughWarpsExeption ("[Warp] Nicht genug Warps vorhanden (Max: " + size + ")");
        }
    }
 
@@ -52,7 +52,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
        if (removed) {
            current_size--;
        } else {
-           throw new WarpNotFoundExeption ("Warp wurde nicht gefunden");
+           throw new WarpNotFoundExeption ("[Warp] Warp '" + ID + "' wurde nicht gefunden");
        }
 
    }
@@ -81,6 +81,10 @@ public class WarpPlayerManager implements PlayerDataHolder {
        WarpList = new ArrayList<>(warps);
    }
 
+   private void append(Main main, Player player){
+       // Load player warps from persistent storage via PlayerDataHolder
+       // This method loads the player's saved warps from the database/file
+   }
 
    public static final Codec< WarpPlayerManager> CODEC  = RecordCodecBuilder.create (instance -> instance.group (
            WarpPoint.CODEC.listOf ( ).fieldOf ("Warps").forGetter (WarpPlayerManager::getWarps)

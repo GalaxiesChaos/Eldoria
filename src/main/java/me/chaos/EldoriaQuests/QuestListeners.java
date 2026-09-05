@@ -34,6 +34,7 @@ public class QuestListeners implements Listener {
             if (quest == null) return;
 
             handlers.getRegisterHandlers().handler.evaluate(e, killer, quest);
+
         }
     }
 

@@ -9,6 +9,9 @@ import me.chaos.EldoriaQuests.RegisterHandlers;
 import me.chaos.eldoriaBase.Listeners.PlayerJoinListener;
 import me.chaos.eldoriaBase.Listeners.PlayerQuitListener;
 import me.chaos.eldoriaBase.PlayerData.PlayerDataRegistry;
+import me.chaos.eldoriaBase.Stats.PlayerStatData;
+import me.chaos.eldoriaBase.Stats.StatEventDispatcher;
+import me.chaos.eldoriaBase.Stats.StatItemUtil;
 import me.chaos.eldoriaBase.Utils.SignInputListener;
 import me.chaos.eldoriaBase.WarpCommand.WarpCommand;
 import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
@@ -31,6 +34,10 @@ public final class Main extends JavaPlugin {
         registerPlayerDataCodec();
         QuestLoader.loadQuests();
 
+        StatItemUtil.init(this);
+        StatLoader.loadStats(this);
+        new StatEventDispatcher(this).registerAll();
+
 
 
     }
@@ -46,6 +53,7 @@ public final class Main extends JavaPlugin {
         PlayerDataRegistry.register (WarpPlayerManager.SAVE_KEY, WarpPlayerManager.CODEC);
         PlayerDataRegistry.register(PlayerMoney.SAVE_KEY, PlayerMoney.CODEC);
         PlayerDataRegistry.register(PlayerBank.SAVE_KEY, PlayerBank.CODEC);
+        PlayerDataRegistry.register(PlayerStatData.SAVE_KEY, PlayerStatData.CODEC);
 
     }
 
@@ -53,6 +61,7 @@ public final class Main extends JavaPlugin {
         PlayerDataRegistry.register(WarpPlayerManager::new);
         PlayerDataRegistry.register(PlayerBank::new);
         PlayerDataRegistry.register(PlayerMoney::new);
+        PlayerDataRegistry.register(PlayerStatData::new);
 
     }
 

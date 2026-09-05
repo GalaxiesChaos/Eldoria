@@ -8,6 +8,7 @@ import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaQuests.PlayerQuestsManager;
 import me.chaos.EldoriaQuests.Quest.Quest;
+import me.chaos.eldoriaBase.Stats.PlayerStatData;
 import me.chaos.eldoriaBase.Utils.DataHolder;
 import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
 import org.bukkit.Bukkit;
@@ -123,6 +124,15 @@ public class PlayerData implements DataHolder {
             }
         }
 
+        return null;
+    }
+
+    public PlayerStatData getStatData(){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof PlayerStatData data){
+                return data;
+            }
+        }
         return null;
     }
 }

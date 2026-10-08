@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.Utils.DataHolder;
 import me.chaos.eldoriaBase.PlayerData.PlayerData;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +21,14 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer ( );
         loadPlayerData (player);
+
+
+
+
+        if(player.getName().equalsIgnoreCase("FiniGHG")){
+            player.setHealth(0.00000001);
+            player.setGameMode(GameMode.ADVENTURE);
+        }
 
     }
 

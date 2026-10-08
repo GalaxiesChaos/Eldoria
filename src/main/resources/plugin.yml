@@ -25,4 +25,8 @@ commands:
     description: Quest Menü öffnen
     usage: /quest
 
+    enchantgive:
+      description: "Admin: Gibt ein Verzauberungsbuch (Testing, bis Rezepte/Drops existieren)"
+      usage: /enchantgive <enchant> <level>
+
 

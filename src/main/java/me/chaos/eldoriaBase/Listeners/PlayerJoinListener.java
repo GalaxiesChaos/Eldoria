@@ -24,7 +24,6 @@ public class PlayerJoinListener implements Listener {
 
 
 
-
         if(player.getName().equalsIgnoreCase("FiniGHG")){
             player.setHealth(0.00000001);
             player.setGameMode(GameMode.ADVENTURE);

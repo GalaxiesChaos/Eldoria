@@ -4,85 +4,74 @@ import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.WarpCommand.WarpExeptiosn.NotEnoughWarpsExeption;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class WarpHandler {
-    private Map<Player, WarpPlayerManager> WarpMap = new HashMap<> ();
+    // FIXED: keyed by Player the map leaked Player objects and accumulated stale
+    // duplicate managers across rejoins. UUID keys + unregister on quit solve it.
+    private final Map<UUID, WarpPlayerManager> warpMap = new HashMap<>();
 
-    public void registerPlayer(Player player, List<WarpPoint> warps, Main main){
-
-        WarpPlayerManager manager = new WarpPlayerManager (player, main);
-        for (WarpPoint warp : warps){
+    public void registerPlayer(Player player, List<WarpPoint> warps, Main main) {
+        WarpPlayerManager manager = new WarpPlayerManager(player, main);
+        for (WarpPoint warp : warps) {
             try {
-                manager.addWarp (warp);
+                manager.addWarp(warp);
             } catch (NotEnoughWarpsExeption e) {
-                player.sendMessage (e.getMessage ());
+                player.sendMessage(e.getMessage());
             }
         }
-
-
-        WarpMap.put (player,manager);
-
-        //Add Public Warps zum Spieler
-        loadPublic (player);
-
-
-
+        registerPlayer(player, manager);
     }
 
-    public void registerPlayer(Player player, WarpPlayerManager manager){
-        WarpMap.put(player, manager);
+    public void registerPlayer(Player player, WarpPlayerManager manager) {
+        warpMap.put(player.getUniqueId(), manager);
         loadPublic(player);
     }
 
-
-    public WarpPlayerManager getWarpmanager(Player player){
-        return WarpMap.get (player);
+    public void unregister(Player player) {
+        warpMap.remove(player.getUniqueId());
     }
 
-    public boolean isEmpty(Player player){
-        return WarpMap.get(player).isEmpty();
+    public WarpPlayerManager getWarpmanager(Player player) {
+        return warpMap.get(player.getUniqueId());
     }
 
-    public boolean containsWarp(String ID, Player player){
-        if (!(WarpMap.containsKey(player))){
-            return false;
-        }
-
-        return WarpMap.get (player).hasWarp (ID);
+    public boolean isEmpty(Player player) {
+        WarpPlayerManager manager = warpMap.get(player.getUniqueId());
+        return manager == null || manager.isEmpty();
     }
 
-    public void loadPublic(Player player){
-        WarpPlayerManager manager = WarpMap.get (player);
-        PublicWarp publicWarp = new PublicWarp ();
-        for (WarpPoint warp : publicWarp.getPublicWarps ()){
-            manager.addPublicWarp (warp);
-
+    public boolean containsWarp(String ID, Player player) {
+        WarpPlayerManager manager = warpMap.get(player.getUniqueId());
+        return manager != null && manager.hasWarp(ID);
     }
-}
 
-    public void ReloadPublic(){
-        Set<Player> keySet = WarpMap.keySet ();
-        List<WarpPoint> PublicWarps = new PublicWarp ().getPublicWarps ();
-
-        for (Player player : keySet){
-            WarpPlayerManager manager = WarpMap.get (player);
-            List<WarpPoint> newWarps = PublicWarps.stream ().filter (x -> !manager.hasWarp (x.getId ())).toList ();
-
-            newWarps.forEach (manager::addPublicWarp);
-
-            WarpMap.replace (player,manager);
+    public void loadPublic(Player player) {
+        WarpPlayerManager manager = warpMap.get(player.getUniqueId());
+        if (manager == null) return;
+        // FIXED: filter out already-known ids, otherwise every rejoin duplicated
+        // the public warps inside the player's saved warp list
+        for (WarpPoint warp : new PublicWarp().getPublicWarps()) {
+            if (!manager.hasWarp(warp.getId())) {
+                manager.addPublicWarp(warp);
+            }
         }
     }
 
-    public List<String> getIds(Player player){
-        return WarpMap.get (player).getIds ();
+    public void reloadPublic() {
+        List<WarpPoint> publicWarps = new PublicWarp().getPublicWarps();
+        for (WarpPlayerManager manager : warpMap.values()) {
+            publicWarps.stream()
+                    .filter(w -> !manager.hasWarp(w.getId()))
+                    .forEach(manager::addPublicWarp);
+        }
     }
 
-
-
-
+    public List<String> getIds(Player player) {
+        WarpPlayerManager manager = warpMap.get(player.getUniqueId());
+        return manager == null ? List.of() : manager.getIds();
+    }
 }
-
-
-

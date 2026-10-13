@@ -1,5 +1,6 @@
 package me.chaos.eldoriaBase;
 
+import me.chaos.EldoriaQuests.QuestHandler;
 import me.chaos.EldoriaQuests.RegisterHandlers;
 import me.chaos.eldoriaBase.PlayerData.PlayerDataHandler;
 import me.chaos.eldoriaBase.Stats.StatManager;
@@ -10,20 +11,21 @@ public class Handlers {
     PlayerDataHandler PlayerHandler;
     RegisterHandlers registerHandlers;
     StatManager statManager;
+    QuestHandler questHandler;
 
-
-    public Handlers(){
-        WarpHandler = new WarpHandler ();
-        PlayerHandler = new PlayerDataHandler ();
-        registerHandlers  = new RegisterHandlers();
+    public Handlers() {
+        WarpHandler = new WarpHandler();
+        PlayerHandler = new PlayerDataHandler();
+        registerHandlers = new RegisterHandlers();
         statManager = new StatManager(this);
+        questHandler = new QuestHandler();
     }
 
-    public WarpHandler getWarpHandler(){
+    public WarpHandler getWarpHandler() {
         return WarpHandler;
     }
 
-    public PlayerDataHandler getPlayerDataHandler(){
+    public PlayerDataHandler getPlayerDataHandler() {
         return PlayerHandler;
     }
 
@@ -31,7 +33,11 @@ public class Handlers {
         return registerHandlers;
     }
 
-    public StatManager getStatManager(){
+    public StatManager getStatManager() {
         return statManager;
+    }
+
+    public QuestHandler getQuestHandler() {
+        return questHandler;
     }
 }

@@ -28,7 +28,7 @@ public class EnchantGiveCommand implements BasicCommand {
     public void execute(CommandSourceStack stack, String[] args) {
         if (!(stack.getExecutor() instanceof Player player)) return;
 
-        if (!player.hasPermission("*")) {
+        if (!player.hasPermission("eldoria.enchant.give")) {
             player.sendMessage(Component.text("Keine Berechtigung.").color(NamedTextColor.RED));
             return;
         }

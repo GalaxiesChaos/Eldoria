@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -46,6 +47,17 @@ public class EnchantMenuClickListener implements Listener {
             handleTableClick(event, player, tableInv);
         } else if (event.getInventory().getHolder() instanceof EnchantAnvilInv anvilInv) {
             handleAnvilClick(event, player, anvilInv);
+        }
+    }
+
+    // Hardening: the class javadoc already documented shift-click/drag as a known
+    // gap - drags are now cancelled outright so items can't be smuggled into the
+    // decorative/option slots.
+    @EventHandler
+    public void onDrag(InventoryDragEvent event) {
+        if (event.getView().getTopInventory().getHolder() instanceof EnchantTableInv
+                || event.getView().getTopInventory().getHolder() instanceof EnchantAnvilInv) {
+            event.setCancelled(true);
         }
     }
 

@@ -12,6 +12,14 @@ authors: [ Chaos ]
 depend:
   - "Multiverse-Core"
 
+permissions:
+  eldoria.warp.admin:
+    description: "Allows creating public warps"
+    default: op
+  eldoria.enchant.give:
+    description: "Allows /enchantgive (admin/testing)"
+    default: op
+
 commands:
   warp:
     description: "Manage player warps (usage: /warp <to|set|addPublic> <id>)"
@@ -23,10 +31,9 @@ commands:
 
   quests:
     description: Quest Menü öffnen
-    usage: /quest
+    usage: /quests
 
-    enchantgive:
-      description: "Admin: Gibt ein Verzauberungsbuch (Testing, bis Rezepte/Drops existieren)"
-      usage: /enchantgive <enchant> <level>
-
-
+  enchantgive:
+    description: "Admin: Gibt ein Verzauberungsbuch (Testing, bis Rezepte/Drops existieren)"
+    usage: /enchantgive <enchant> <level>
+    permission: eldoria.enchant.give

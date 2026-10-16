@@ -9,7 +9,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
+import me.chaos.EldoriaAntiDupe.ProtectedGui;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class QuestSelectionInv implements InventoryHolder {
+public class QuestSelectionInv implements ProtectedGui {
 
     public static final int[] QUEST_SLOTS = {11, 13, 15};
 

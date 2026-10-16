@@ -6,7 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
+import me.chaos.EldoriaAntiDupe.ProtectedGui;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 
 
-public class BankInterfaceInv implements InventoryHolder {
+public class BankInterfaceInv implements ProtectedGui {
     private final Inventory BankInterface;
 
     public BankInterfaceInv(){

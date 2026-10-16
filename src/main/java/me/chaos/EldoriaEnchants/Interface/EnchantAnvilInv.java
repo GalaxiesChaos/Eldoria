@@ -6,7 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
+import me.chaos.EldoriaAntiDupe.ProtectedGui;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  * entirely while this menu is open. If you still want those, they'd need their
  * own slots added here.
  */
-public class EnchantAnvilInv implements InventoryHolder {
+public class EnchantAnvilInv implements ProtectedGui {
 
     public static final int GEAR_SLOT = 11;
     public static final int BOOK_SLOT = 15;
@@ -44,6 +44,11 @@ public class EnchantAnvilInv implements InventoryHolder {
         meta.displayName(Component.text("Anwenden").color(NamedTextColor.GREEN));
         confirm.setItemMeta(meta);
         inventory.setItem(CONFIRM_SLOT, confirm);
+    }
+
+    @Override
+    public boolean isInteractiveSlot(int slot) {
+        return slot == GEAR_SLOT || slot == BOOK_SLOT; // gear + enchant book go here
     }
 
     @Override

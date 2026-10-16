@@ -7,12 +7,12 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
+import me.chaos.EldoriaAntiDupe.ProtectedGui;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-public class QuestConfirmInv implements InventoryHolder {
+public class QuestConfirmInv implements ProtectedGui {
 
     public static final int ACCEPT_SLOT = 12;
     public static final int REROLL_SLOT = 14;

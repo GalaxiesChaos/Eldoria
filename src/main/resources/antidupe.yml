@@ -1,0 +1,52 @@
+# EldoriaAntiDupe - Einstellungen
+enabled: true
+
+# ENFORCE  = Kopien entfernen (landen in der Quarantaene) + Original bekommt neue Seriennummer
+# LOG_ONLY = nur melden/loggen (empfohlen fuer die ersten Tage auf einem Testserver)
+mode: ENFORCE
+
+scan:
+  interval-ticks: 40         # Aenderung erst nach Neustart aktiv
+  min-interval-ms: 1000      # Mindestabstand fuer Sofort-Scans (Join, Tod, Container oeffnen)
+  max-removals-per-scan: 20  # Notbremse: bei mehr Entfernungen pro Scan wird nur geloggt
+
+protected:
+  shulker-boxes: true
+  bundles: true
+  # Nur Materialien mit Stack-Groesse 1 koennen eine Seriennummer tragen.
+  materials:
+    - ELYTRA
+    - TOTEM_OF_UNDYING
+    - TRIDENT
+    - MACE
+    - NETHERITE_SWORD
+    - NETHERITE_AXE
+    - NETHERITE_PICKAXE
+    - NETHERITE_SHOVEL
+    - NETHERITE_HOE
+    - NETHERITE_HELMET
+    - NETHERITE_CHESTPLATE
+    - NETHERITE_LEGGINGS
+    - NETHERITE_BOOTS
+  # Jedes Item mit einem PDC-Key, der mit einem dieser Praefixe beginnt, wird geschuetzt.
+  # "eldoriaitems:" ist geraten - bitte an den echten Namespace von EldoriaItems anpassen.
+  key-prefixes:
+    - "eldoriaenchants:"
+    - "eldoriabase:stat_"
+    - "eldoriabase:serial"
+    - "eldoriaitems:"
+
+click-limit:
+  enabled: true
+  max-per-second: 30
+
+portal:
+  block-container-entities: true   # Chest-Minecart/Boot, Hopper-Minecart, Esel/Maultier/Lama mit Truhe
+
+gui-guard: true                    # Shift-/Doppelklick-/Drag-Exploits in ProtectedGui-Menues
+creative-reset-serial: true        # Creative-Klone bekommen eine neue Seriennummer
+audit-paper-config: true           # Warnt beim Start vor aktivierten Dupe-Schaltern in der Paper-Config
+
+permissions:
+  alert: eldoria.antidupe.alert
+  bypass-click-limit: eldoria.antidupe.bypass

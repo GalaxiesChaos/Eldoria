@@ -6,6 +6,8 @@ import me.chaos.EldoriaCash.Interface.BankCommand;
 import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
+import me.chaos.EldoriaAntiDupe.AntiDupeModule;
+import me.chaos.EldoriaDrops.DropModule;
 import me.chaos.EldoriaEnchants.Commands.EnchantGiveCommand;
 import me.chaos.EldoriaEnchants.EnchantLoader;
 import me.chaos.EldoriaEnchants.Listeners.EnchantEventListener;
@@ -51,6 +53,11 @@ public final class Main extends JavaPlugin {
         StatItemUtil.init(this);
         StatLoader.loadStats(this);
         new StatEventDispatcher(this).registerAll();
+
+        // NEW: drop system (block tags + loot tables + direct-to-inventory drops), needs stats loaded
+        DropModule.init(this);
+        // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
+        AntiDupeModule.init(this);
     }
 
     public void registerListeners() {
@@ -106,6 +113,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // NEW: flush the serial-number registry (quarantine/audit trail) before data saves
+        AntiDupeModule.shutdown();
         // FIXED: data was only written on quit, so a crash/reload rolled everyone back.
         // Flush every online player's data on shutdown.
         for (Player player : Bukkit.getOnlinePlayers()) {

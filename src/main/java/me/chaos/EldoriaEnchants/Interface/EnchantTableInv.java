@@ -10,7 +10,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
+import me.chaos.EldoriaAntiDupe.ProtectedGui;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ import java.util.List;
  * - anything above that only comes from enchant books (drops/recipes) applied at
  * the anvil (see {@link EnchantAnvilInv}).
  */
-public class EnchantTableInv implements InventoryHolder {
+public class EnchantTableInv implements ProtectedGui {
 
     public static final int ITEM_SLOT = 4;
     public static final int[] OPTION_SLOTS = {19, 20, 21, 22, 23, 24, 25};
@@ -81,6 +81,11 @@ public class EnchantTableInv implements InventoryHolder {
         meta.lore(lore);
         book.setItemMeta(meta);
         return book;
+    }
+
+    @Override
+    public boolean isInteractiveSlot(int slot) {
+        return slot == ITEM_SLOT; // players place/take the gear to enchant here
     }
 
     @Override

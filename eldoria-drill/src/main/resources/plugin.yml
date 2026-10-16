@@ -1,0 +1,9 @@
+name: EldoriaDrill
+version: 1.0.0
+main: net.eldoria.drill.DrillPlugin
+api-version: '1.21'
+description: Drill system (bases, fuel, upgrades, modules) for Eldoria
+permissions:
+  eldoria.drill.admin:
+    description: Give drills/upgrades and set fuel
+    default: op

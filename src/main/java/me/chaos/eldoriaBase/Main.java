@@ -8,6 +8,7 @@ import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
 import me.chaos.EldoriaDrops.DropModule;
+import net.eldoria.drill.DrillModule;
 import me.chaos.EldoriaEnchants.Commands.EnchantGiveCommand;
 import me.chaos.EldoriaEnchants.EnchantLoader;
 import me.chaos.EldoriaEnchants.Listeners.EnchantEventListener;
@@ -56,6 +57,8 @@ public final class Main extends JavaPlugin {
 
         // NEW: drop system (block tags + loot tables + direct-to-inventory drops), needs stats loaded
         DropModule.init(this);
+        // NEW: drill system (bases, fuel, upgrades, modules); example content included
+        DrillModule.init(this);
         // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
         AntiDupeModule.init(this);
     }

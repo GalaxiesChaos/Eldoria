@@ -1,4 +1,4 @@
-package me.chaos.EldoriaEnchants;
+package me.chaos.EldoriaEnchants.Listeners;
 
 import me.chaos.EldoriaEnchants.CustomEnchant;
 import me.chaos.EldoriaEnchants.EnchantData;

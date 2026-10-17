@@ -1,4 +1,4 @@
-package me.chaos.EldoriaEnchants;
+package me.chaos.EldoriaEnchants.Listeners;
 
 import me.chaos.EldoriaEnchants.Interface.EnchantAnvilInv;
 import me.chaos.EldoriaEnchants.Interface.EnchantTableInv;

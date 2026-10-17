@@ -1,4 +1,4 @@
-package me.chaos.EldoriaEnchants;
+package me.chaos.EldoriaEnchants.Interface;
 
 import me.chaos.eldoriaBase.Utils.GuiBuilder.GuiInterface;
 import net.kyori.adventure.text.Component;

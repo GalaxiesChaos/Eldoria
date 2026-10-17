@@ -1,4 +1,4 @@
-package me.chaos.EldoriaEnchants;
+package me.chaos.EldoriaEnchants.Enchants;
 
 import me.chaos.EldoriaEnchants.EnchantStat;
 import me.chaos.EldoriaEnchants.EnchantTarget;

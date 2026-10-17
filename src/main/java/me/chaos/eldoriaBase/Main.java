@@ -7,8 +7,8 @@ import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
+import me.chaos.EldoriaDrill.DrillModule;
 import me.chaos.EldoriaDrops.DropModule;
-import net.eldoria.drill.DrillModule;
 import me.chaos.EldoriaEnchants.Commands.EnchantGiveCommand;
 import me.chaos.EldoriaEnchants.EnchantLoader;
 import me.chaos.EldoriaEnchants.Listeners.EnchantEventListener;
@@ -109,7 +109,7 @@ public final class Main extends JavaPlugin {
         registerCommand("enchantgive", new EnchantGiveCommand());
     }
 
-    private void registerCommand(String name, BasicCommand command) {
+    public void registerCommand(String name, BasicCommand command) {
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
                 event -> event.registrar().register(name, command));
     }

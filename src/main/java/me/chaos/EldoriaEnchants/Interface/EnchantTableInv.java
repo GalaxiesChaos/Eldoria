@@ -1,4 +1,5 @@
-package me.chaos.EldoriaEnchants;
+
+package me.chaos.EldoriaEnchants.Interface;
 
 import me.chaos.EldoriaEnchants.CustomEnchant;
 import me.chaos.EldoriaEnchants.EnchantRegistry;

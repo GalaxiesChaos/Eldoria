@@ -8,7 +8,9 @@ import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
 import me.chaos.EldoriaDrops.DropModule;
-import net.eldoria.drill.DrillModule;
+import me.chaos.EldoriaDrill.DrillModule;
+import me.chaos.EldoriaForge.ForgeModule;
+import me.chaos.EldoriaForge.data.PlayerForgeData;
 import me.chaos.EldoriaEnchants.Commands.EnchantGiveCommand;
 import me.chaos.EldoriaEnchants.EnchantLoader;
 import me.chaos.EldoriaEnchants.Listeners.EnchantEventListener;
@@ -59,6 +61,8 @@ public final class Main extends JavaPlugin {
         DropModule.init(this);
         // NEW: drill system (bases, fuel, upgrades, modules); example content included
         DrillModule.init(this);
+        // NEW: forge system (16 stations, recipes, Nexo items)
+        ForgeModule.init(this);
         // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
         AntiDupeModule.init(this);
     }
@@ -92,6 +96,7 @@ public final class Main extends JavaPlugin {
         PlayerDataRegistry.register(PlayerStatData.SAVE_KEY, PlayerStatData.CODEC);
         // FIXED: quest data was never registered, so quests could not persist
         PlayerDataRegistry.register(PlayerQuestsManager.SAVE_KEY, PlayerQuestsManager.CODEC);
+        PlayerDataRegistry.register(PlayerForgeData.SAVE_KEY, PlayerForgeData.CODEC);
     }
 
     private void registerPlayerData() {
@@ -100,6 +105,7 @@ public final class Main extends JavaPlugin {
         PlayerDataRegistry.register(PlayerMoney::new);
         PlayerDataRegistry.register(PlayerStatData::new);
         PlayerDataRegistry.register(PlayerQuestsManager::new);
+        PlayerDataRegistry.register(PlayerForgeData::new);
     }
 
     private void registerCommands() {

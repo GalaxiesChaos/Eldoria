@@ -7,6 +7,9 @@ import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
+import me.chaos.EldoriaContent.EldoriaContentModule;
+import me.chaos.EldoriaItems.Command.EldoriaItemCommand;
+import me.chaos.EldoriaItems.EldoriaItemsModule;
 import me.chaos.EldoriaDrops.DropModule;
 import me.chaos.EldoriaDrill.DrillModule;
 import me.chaos.EldoriaForge.ForgeModule;
@@ -57,12 +60,18 @@ public final class Main extends JavaPlugin {
         StatLoader.loadStats(this);
         new StatEventDispatcher(this).registerAll();
 
+        // NEW: custom item system (templates, rarity upgrades, sets, bonus drops) - before all content
+        EldoriaItemsModule.init(this);
+
         // NEW: drop system (block tags + loot tables + direct-to-inventory drops), needs stats loaded
         DropModule.init(this);
-        // NEW: drill system (bases, fuel, upgrades, modules); example content included
-        DrillModule.init(this);
-        // NEW: forge system (16 stations, recipes, Nexo items)
+        // NEW: drill system (bases, fuel, upgrades, modules); example content disabled,
+        // real drill content is registered by MiningContentModule below
+        DrillModule.init(this, false);
+        // NEW: forge system (16 stations, recipes, Nexo/Eldoria/drill items)
         ForgeModule.init(this);
+        // NEW: real mining content (materials, tools, armor sets, drill parts, forge recipes, drops)
+        MiningContentModule.init(this);
         // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
         AntiDupeModule.init(this);
     }
@@ -113,6 +122,7 @@ public final class Main extends JavaPlugin {
         registerCommand("bank", new BankCommand());
         registerCommand("quests", new QuestCommand());
         registerCommand("enchantgive", new EnchantGiveCommand());
+        registerCommand("eitem", new EldoriaItemCommand());
     }
 
     private void registerCommand(String name, BasicCommand command) {

@@ -24,7 +24,9 @@ public final class MiningSpeedTask extends BukkitRunnable {
             if (data.isEmpty() || data.get().fuel() <= 1e-6) {
                 continue;
             }
-            int level = (int) Math.floor(DrillCalculator.totalStats(data.get()).get(DrillStatRegistry.MINING_SPEED));
+            // Spec-scale: 50 aggregate points ~ Haste I, capped at Haste V
+            double speed = DrillCalculator.totalStats(data.get()).get(DrillStatRegistry.MINING_SPEED);
+            int level = (int) Math.floor(speed / 50.0);
             if (level <= 0) {
                 continue;
             }

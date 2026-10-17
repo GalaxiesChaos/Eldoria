@@ -8,6 +8,7 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.onarandombox.com/content/groups/public/")
+    maven("https://repo.nexomc.com/releases/")
 }
 
 
@@ -22,6 +23,9 @@ dependencies {
 
     //Luckyperms
     compileOnly("net.luckperms:api:5.5")
+
+    //Nexo (custom items for forge recipes etc.)
+    compileOnly("com.nexomc:nexo:1.29.1")
 
     //Plotsquared implementation
     implementation(platform("com.intellectualsites.bom:bom-newest:1.56"))

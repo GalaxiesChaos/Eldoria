@@ -9,6 +9,9 @@ load: POSTWORLD
 
 authors: [ Chaos ]
 
+soft-depend:
+  - "Nexo"
+
 depend:
   - "Multiverse-Core"
 
@@ -18,6 +21,9 @@ permissions:
     default: op
   eldoria.enchant.give:
     description: "Allows /enchantgive (admin/testing)"
+    default: op
+  eldoria.forge.admin:
+    description: "Allows /forge admin (slot management)"
     default: op
 
 commands:

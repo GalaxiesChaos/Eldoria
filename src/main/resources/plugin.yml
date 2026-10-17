@@ -25,6 +25,9 @@ permissions:
   eldoria.forge.admin:
     description: "Allows /forge admin (slot management)"
     default: op
+  eldoria.item.admin:
+    description: "Allows /eitem (give/list/upgrade of custom items)"
+    default: op
 
 commands:
   warp:
@@ -43,3 +46,8 @@ commands:
     description: "Admin: Gibt ein Verzauberungsbuch (Testing, bis Rezepte/Drops existieren)"
     usage: /enchantgive <enchant> <level>
     permission: eldoria.enchant.give
+
+  eitem:
+    description: "Admin: Custom-Items geben/listen/verbessern"
+    usage: /eitem <give|list|upgrade>
+    permission: eldoria.item.admin

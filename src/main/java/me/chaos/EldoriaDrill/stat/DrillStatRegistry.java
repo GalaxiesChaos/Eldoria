@@ -19,6 +19,10 @@ public final class DrillStatRegistry {
     public static final DrillStat MINING_SPEED = register(new DrillStat("mining_speed", "Abbaugeschwindigkeit", false));
     /** Mining drop chance, exposed to the drop system via DrillBreakEvent (not applied here). */
     public static final DrillStat DROP_CHANCE = register(new DrillStat("drop_chance", "Dropchance", true));
+    /** Multiplies drop stack sizes; consumed by DrillDropEnhancements (100 = double drops). */
+    public static final DrillStat MINING_FORTUNE = register(new DrillStat("mining_fortune", "Bergbaugl\u00fcck", true));
+    /** Breaks additional adjacent blocks of the same type while drilling; consumed by MiningListener. */
+    public static final DrillStat MINING_SPREAD = register(new DrillStat("mining_spread", "Abbaufl\u00e4che", false));
     /** Reserved for the plates. No built-in behaviour yet. */
     public static final DrillStat REINFORCEMENT = register(new DrillStat("reinforcement", "Verstärkung", false));
 

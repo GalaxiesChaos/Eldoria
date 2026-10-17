@@ -5,8 +5,6 @@ import me.chaos.EldoriaItems.Item.Enchant.CustomEnchantment;
 import me.chaos.EldoriaItems.Item.Obtain.ObtainInfo;
 import me.chaos.EldoriaItems.Item.Stats.StatType;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemRarity;
-import org.bukkit.inventory.ItemType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

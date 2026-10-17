@@ -1,5 +1,7 @@
 package me.chaos.EldoriaForge.recipe;
 
+import me.chaos.EldoriaDrill.data.DrillItems;
+import me.chaos.EldoriaItems.Item.CustomItemService;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,6 +30,20 @@ public final class ForgeIngredient {
         if (ForgeItems.isNexo(item)) {
             String id = ForgeItems.nexoId(stack);
             return id != null && id.equalsIgnoreCase(item.substring(ForgeItems.NEXO_PREFIX.length()));
+        }
+        if (ForgeItems.isEldoria(item)) {
+            String id = CustomItemService.getTemplateId(stack);
+            return id != null && id.equalsIgnoreCase(item.substring(ForgeItems.ELDR_PREFIX.length()));
+        }
+        if (ForgeItems.isDrill(item)) {
+            return DrillItems.upgradeOf(stack)
+                    .map(upgrade -> upgrade.id().equalsIgnoreCase(item.substring(ForgeItems.DRILL_PREFIX.length())))
+                    .orElse(false);
+        }
+        if (ForgeItems.isDrillBase(item)) {
+            return DrillItems.read(stack)
+                    .map(data -> data.baseId().equalsIgnoreCase(item.substring(ForgeItems.DRILLBASE_PREFIX.length())))
+                    .orElse(false);
         }
         return stack.getType().name().equalsIgnoreCase(item);
     }

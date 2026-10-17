@@ -1,6 +1,10 @@
 package me.chaos.EldoriaForge.recipe;
 
 import com.nexomc.nexo.api.NexoItems;
+import me.chaos.EldoriaDrill.base.DrillBaseRegistry;
+import me.chaos.EldoriaDrill.data.DrillItems;
+import me.chaos.EldoriaDrill.upgrade.DrillUpgradeRegistry;
+import me.chaos.EldoriaItems.Item.CustomItemService;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,6 +22,9 @@ import java.util.Map;
  */
 public final class ForgeItems {
     public static final String NEXO_PREFIX = "nexo:";
+    public static final String ELDR_PREFIX = "eldoria:";
+    public static final String DRILL_PREFIX = "drill:";
+    public static final String DRILLBASE_PREFIX = "drillbase:";
     private static final Map<String, ItemStack> CACHE = new HashMap<>();
 
     private ForgeItems() {
@@ -25,6 +32,18 @@ public final class ForgeItems {
 
     public static boolean isNexo(String template) {
         return template != null && template.toLowerCase().startsWith(NEXO_PREFIX);
+    }
+
+    public static boolean isEldoria(String template) {
+        return template != null && template.toLowerCase().startsWith(ELDR_PREFIX);
+    }
+
+    public static boolean isDrill(String template) {
+        return template != null && template.toLowerCase().startsWith(DRILL_PREFIX);
+    }
+
+    public static boolean isDrillBase(String template) {
+        return template != null && template.toLowerCase().startsWith(DRILLBASE_PREFIX);
     }
 
     /** Fresh copy of the resolved item; BARRIER as fallback (never null). */
@@ -73,6 +92,31 @@ public final class ForgeItems {
                 return null; // not cached -> retried once Nexo has loaded its items
             }
             return NexoItems.itemFromId(id).build();
+        }
+
+        if (isEldoria(template)) {
+            ItemStack stack = CustomItemService.createItemStack(template.substring(ELDR_PREFIX.length()));
+            if (stack == null) {
+                Bukkit.getLogger().warning("[EldoriaForge]: Eldoria-Item '" + template + "' ist nicht registriert.");
+                return ItemStack.of(Material.BARRIER);
+            }
+            return stack;
+        }
+        if (isDrill(template)) {
+            return DrillUpgradeRegistry.get(template.substring(DRILL_PREFIX.length()))
+                    .map(DrillItems::createUpgrade)
+                    .orElseGet(() -> {
+                        Bukkit.getLogger().warning("[EldoriaForge]: Bohrupgrade '" + template + "' ist nicht registriert.");
+                        return ItemStack.of(Material.BARRIER);
+                    });
+        }
+        if (isDrillBase(template)) {
+            return DrillBaseRegistry.get(template.substring(DRILLBASE_PREFIX.length()))
+                    .map(DrillItems::createBase)
+                    .orElseGet(() -> {
+                        Bukkit.getLogger().warning("[EldoriaForge]: Bohrerbasis '" + template + "' ist nicht registriert.");
+                        return ItemStack.of(Material.BARRIER);
+                    });
         }
 
         Material material = Material.matchMaterial(template.toUpperCase());

@@ -1,0 +1,23 @@
+# Weltnamen (Multiverse-Welten sind normale Bukkit-Welten)
+worlds:
+  farmwelt: farmwelt
+  plotwelt: plotwelt
+  spawn: world
+
+# /rtp - nur in dieser Welt, Ring zwischen min- und max-radius um den Mittelpunkt
+randomtp:
+  world: farmwelt
+  min-radius: 200
+  max-radius: 5000
+  center-x: 0
+  center-z: 0
+  max-attempts: 15
+  cooldown-seconds: 60
+
+# Regelwerk (MiniMessage-Format, eine Zeile = eine Buchseite, \n = Zeilenumbruch)
+rules:
+  title: "<gold>Regelwerk"
+  npc-name: "<gold><bold>Regelwerk"
+  pages:
+    - "<gold><bold>Regelwerk</bold></gold>\n\n<black>1. Respektvoller Umgang\n2. Kein Griefing\n3. Keine Cheats oder Exploits"
+    - "<black>4. Kein Spam / keine Werbung\n5. Den Anweisungen des Teams ist Folge zu leisten\n\n<dark_gray>(Beispieltext, bitte anpassen)"

@@ -31,6 +31,39 @@ permissions:
   eldoria.item.admin:
     description: "Allows /eitem (give/list/upgrade of custom items)"
     default: op
+  eldoria.farmwelt:
+    description: "Allows /farmwelt"
+    default: true
+  eldoria.plotwelt:
+    description: "Allows /plotwelt"
+    default: true
+  eldoria.spawn:
+    description: "Allows /spawn"
+    default: true
+  eldoria.ec:
+    description: "Allows /ec (own ender chest)"
+    default: true
+  eldoria.ec.others:
+    description: "Allows /ec <player> (other players' ender chests)"
+    default: op
+  eldoria.randomtp:
+    description: "Allows /rtp"
+    default: true
+  eldoria.randomtp.bypass:
+    description: "Bypasses the /rtp cooldown"
+    default: op
+  eldoria.jewels:
+    description: "Allows /juwelen (see own balance)"
+    default: true
+  eldoria.jewels.admin:
+    description: "Allows /juwelen give|take|set"
+    default: op
+  eldoria.rules:
+    description: "Allows /regelwerk (open the rules book)"
+    default: true
+  eldoria.rules.admin:
+    description: "Allows /regelwerk npc|remove"
+    default: op
 
 commands:
   warp:
@@ -58,3 +91,31 @@ commands:
     description: "Admin: NPCs spawnen/entfernen/verwalten (usage: /npc <spawn|remove|list|reload> [id|all])"
     usage: /npc <spawn|remove|list|reload> [id|all]
     permission: eldoria.npc.admin
+  farmwelt:
+    description: "Teleport zur Farmwelt"
+    usage: /farmwelt
+    permission: eldoria.farmwelt
+  plotwelt:
+    description: "Teleport zur Plotwelt"
+    usage: /plotwelt
+    permission: eldoria.plotwelt
+  spawn:
+    description: "Teleport zum Spawn"
+    usage: /spawn
+    permission: eldoria.spawn
+  ec:
+    description: "Öffnet die Enderchest"
+    usage: /ec [spieler]
+    permission: eldoria.ec
+  rtp:
+    description: "Zufälliger Teleport in der Farmwelt"
+    usage: /rtp
+    permission: eldoria.randomtp
+  juwelen:
+    description: "Juwelen anzeigen/verwalten"
+    usage: /juwelen [balance|give|take|set]
+    permission: eldoria.jewels
+  regelwerk:
+    description: "Zeigt das Regelwerk"
+    usage: /regelwerk [npc|remove]
+    permission: eldoria.rules

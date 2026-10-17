@@ -7,6 +7,9 @@ import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
+import me.chaos.EldoriaCommands.CommandsModule;
+import me.chaos.EldoriaJewels.JewelsModule;
+import me.chaos.EldoriaRules.RulesModule;
 import me.chaos.EldoriaContent.MiningContentModule;
 import me.chaos.EldoriaItems.Command.EldoriaItemCommand;
 import me.chaos.EldoriaItems.EldoriaItemsModule;
@@ -40,6 +43,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mvplugins.multiverse.core.MultiverseCoreApi;
 
+import java.util.List;
+
 public final class Main extends JavaPlugin {
     private MultiverseCoreApi coreApi;
     public Handlers handler = new Handlers();
@@ -48,6 +53,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         coreApi = MultiverseCoreApi.get();
 
+        saveDefaultConfig();
         registerPlayerData();
         registerListeners();
         registerCommands();
@@ -64,9 +70,6 @@ public final class Main extends JavaPlugin {
         // NEW: custom item system (templates, rarity upgrades, sets, bonus drops) - before all content
         EldoriaItemsModule.init(this);
 
-        // NEW: custom item system (templates, rarity upgrades, sets, bonus drops) - before all content
-        EldoriaItemsModule.init(this);
-
         // NEW: drop system (block tags + loot tables + direct-to-inventory drops), needs stats loaded
         DropModule.init(this);
         // NEW: drill system (bases, fuel, upgrades, modules); example content disabled,
@@ -78,6 +81,13 @@ public final class Main extends JavaPlugin {
         MiningContentModule.init(this);
         // NEW: NPC system (interactable NPCs: dialogue, GUIs, teleports)
         NPCModule.init(this);
+        // NEW: world commands (/farmwelt, /plotwelt, /spawn), /ec and /rtp (Multiverse worlds)
+        CommandsModule.init(this);
+        // NEW: jewel currency (/juwelen) + JewelService for shops/quests (registers its own PlayerData codec)
+        JewelsModule.init(this);
+        // NEW: rules book + rules NPC (villager with PDC tag, opens the book on right-click)
+        RulesModule.init(this);
+
         // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
         AntiDupeModule.init(this);
     }
@@ -135,6 +145,11 @@ public final class Main extends JavaPlugin {
     public void registerCommand(String name, BasicCommand command) {
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
                 event -> event.registrar().register(name, command));
+    }
+
+    public void registerCommand(String name, List<String> aliases, BasicCommand command) {
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
+                event -> event.registrar().register(name, aliases, command));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package me.chaos.eldoriaBase;
 
+import me.chaos.EldoriaJewels.JewelService;
 import me.chaos.EldoriaQuests.QuestHandler;
 import me.chaos.EldoriaQuests.RegisterHandlers;
 import me.chaos.eldoriaBase.PlayerData.PlayerDataHandler;
@@ -12,6 +13,7 @@ public class Handlers {
     RegisterHandlers registerHandlers;
     StatManager statManager;
     QuestHandler questHandler;
+    JewelService jewelService;
 
     public Handlers() {
         WarpHandler = new WarpHandler();
@@ -19,6 +21,7 @@ public class Handlers {
         registerHandlers = new RegisterHandlers();
         statManager = new StatManager(this);
         questHandler = new QuestHandler();
+        jewelService = new JewelService(this);
     }
 
     public WarpHandler getWarpHandler() {
@@ -39,5 +42,9 @@ public class Handlers {
 
     public QuestHandler getQuestHandler() {
         return questHandler;
+    }
+
+    public JewelService getJewelService() {
+        return jewelService;
     }
 }

@@ -9,6 +9,7 @@ import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaQuests.PlayerQuestsManager;
 import me.chaos.EldoriaQuests.Quest.Quest;
 import me.chaos.EldoriaForge.data.PlayerForgeData;
+import me.chaos.EldoriaJewels.PlayerJewels;
 import me.chaos.eldoriaBase.Stats.PlayerStatData;
 import me.chaos.eldoriaBase.Utils.DataHolder;
 import me.chaos.eldoriaBase.WarpCommand.WarpPlayerManager;
@@ -131,6 +132,15 @@ public class PlayerData implements DataHolder {
     public PlayerForgeData getForgeData(){
         for (PlayerDataHolder dataHolder : PlayerDataList){
             if (dataHolder instanceof PlayerForgeData data){
+                return data;
+            }
+        }
+        return null;
+    }
+
+    public PlayerJewels getJewels(){
+        for (PlayerDataHolder dataHolder : PlayerDataList){
+            if (dataHolder instanceof PlayerJewels data){
                 return data;
             }
         }

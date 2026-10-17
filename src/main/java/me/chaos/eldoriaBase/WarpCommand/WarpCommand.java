@@ -4,6 +4,7 @@ import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import me.chaos.eldoriaBase.Main;
 import me.chaos.eldoriaBase.WarpCommand.WarpExeptiosn.NotEnoughWarpsExeption;
+import me.chaos.eldoriaBase.WarpCommand.WarpExeptiosn.WarpNotFoundExeption;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -40,7 +41,12 @@ public class WarpCommand implements BasicCommand {
         switch (action.toLowerCase(Locale.ROOT)) {
             case "to" -> {
                 if (handler.containsWarp(value, player)) {
-                    player.teleport(handler.getWarpmanager(player).getWarp(value).getWarpLocation());
+                    try {
+                        player.teleport(handler.getWarpmanager(player).getWarp(value).getWarpLocation());
+                    } catch (WarpNotFoundExeption e) {
+                        player.sendMessage(e.getMessage());
+
+                    }
                 } else {
                     player.sendMessage(ChatColor.RED + value + " ist keine gültige ID");
                 }

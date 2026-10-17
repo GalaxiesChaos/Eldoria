@@ -192,7 +192,7 @@ public final class MaterialItems {
         ItemStack result = me.chaos.EldoriaItems.Item.CustomItemService.createItemStack("hardwood_stick");
         result.setAmount(4);
         ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey(plugin, "hardwood_sticks"), result);
-        recipe.addIngredient(2, new RecipeChoice.ExactChoice(
+        recipe.addIngredient(new RecipeChoice.ExactChoice(
                 me.chaos.EldoriaItems.Item.CustomItemService.createItemStack("hardwood")));
         return recipe;
     }

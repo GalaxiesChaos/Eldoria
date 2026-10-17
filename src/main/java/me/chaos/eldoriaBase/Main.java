@@ -7,7 +7,7 @@ import me.chaos.EldoriaCash.OnClickEvent;
 import me.chaos.EldoriaCash.PlayerBank;
 import me.chaos.EldoriaCash.PlayerMoney;
 import me.chaos.EldoriaAntiDupe.AntiDupeModule;
-import me.chaos.EldoriaContent.EldoriaContentModule;
+import me.chaos.EldoriaContent.MiningContentModule;
 import me.chaos.EldoriaItems.Command.EldoriaItemCommand;
 import me.chaos.EldoriaItems.EldoriaItemsModule;
 import me.chaos.EldoriaDrops.DropModule;
@@ -132,7 +132,7 @@ public final class Main extends JavaPlugin {
         registerCommand("eitem", new EldoriaItemCommand());
     }
 
-    private void registerCommand(String name, BasicCommand command) {
+    public void registerCommand(String name, BasicCommand command) {
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
                 event -> event.registrar().register(name, command));
     }

@@ -77,7 +77,7 @@ public class WarpPlayerManager implements PlayerDataHolder {
         WarpList = new ArrayList<>(warps);
     }
 
-    private void append(Main main, Player player) {
+    public void append(Main main, Player player) {
         // kept for API compatibility; actual loading happens via PlayerData + CODEC
     }
 

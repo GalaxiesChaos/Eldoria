@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public final class MiningCategories {
 
-    private static final Set<Material> ORES = EnumSet.of(
+    public static final Set<Material> ORES = EnumSet.of(
             Material.COAL_ORE, Material.DEEPSLATE_COAL_ORE,
             Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE,
             Material.COPPER_ORE, Material.DEEPSLATE_COPPER_ORE,
@@ -28,7 +28,7 @@ public final class MiningCategories {
 
     // "Uncrafted" stone - raw variants only. NOT stone bricks, polished stone/andesite/etc,
     // smooth stone, walls, stairs, slabs and the like.
-    private static final Set<Material> RAW_STONE = EnumSet.of(
+    public static final Set<Material> RAW_STONE = EnumSet.of(
             Material.STONE,
             Material.COBBLESTONE,
             Material.DEEPSLATE,

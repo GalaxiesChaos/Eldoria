@@ -17,8 +17,10 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -101,7 +103,8 @@ public final class DrillDropEnhancements implements Listener {
     private static Map<Material, Material> buildSmeltMap() {
         Map<Material, Material> map = new EnumMap<>(Material.class);
         ItemStack probe = new ItemStack(Material.IRON_ORE); // representative input stack
-        for (Recipe recipe : Bukkit.recipeIterator()) {
+        for (@NotNull Iterator<Recipe> it = Bukkit.recipeIterator(); it.hasNext(); ) {
+            Recipe recipe = it.next();
             if (!(recipe instanceof org.bukkit.inventory.FurnaceRecipe furnace)) {
                 continue;
             }

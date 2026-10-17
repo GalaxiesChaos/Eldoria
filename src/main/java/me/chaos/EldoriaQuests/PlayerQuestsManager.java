@@ -32,6 +32,10 @@ public class PlayerQuestsManager implements PlayerDataHolder {
             Quest.CODEC.listOf().fieldOf("Quests").forGetter(PlayerQuestsManager::getQuests)
     ).apply(instance, PlayerQuestsManager::new));
 
+    public PlayerQuestsManager() {
+
+    }
+
     public void add(Quest quest) throws DefaultQuestExeption {
         // FIXED: off-by-one — `>` allowed MAX+1 quests
         if (Quests.size() >= MAX) {

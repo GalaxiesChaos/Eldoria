@@ -7,7 +7,6 @@ import me.chaos.EldoriaItems.Item.Obtain.ObtainMethod;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -192,7 +191,7 @@ public final class MaterialItems {
         ItemStack result = me.chaos.EldoriaItems.Item.CustomItemService.createItemStack("hardwood_stick");
         result.setAmount(4);
         ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey(plugin, "hardwood_sticks"), result);
-        recipe.addIngredient(new RecipeChoice.ExactChoice(
+        recipe.addIngredient(RecipeChoice.exactChoice(
                 me.chaos.EldoriaItems.Item.CustomItemService.createItemStack("hardwood")));
         return recipe;
     }
@@ -201,7 +200,7 @@ public final class MaterialItems {
         ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(plugin, resultId),
                 me.chaos.EldoriaItems.Item.CustomItemService.createItemStack(resultId));
         recipe.shape("MMM", "MMM", "MMM");
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(
+        recipe.setIngredient('M', RecipeChoice.exactChoice(
                 me.chaos.EldoriaItems.Item.CustomItemService.createItemStack(ingredientId)));
         return recipe;
     }

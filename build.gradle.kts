@@ -13,13 +13,13 @@ repositories {
 
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.2.build.+")
+    compileOnly("io.papermc.paper:paper-api:26.3.build.+")
 
     //MultiVerse
     compileOnly("org.mvplugins.multiverse.core:multiverse-core:5.7.2")
 
     //Minecraft API
-    paperweight.paperDevBundle("26.2.build.+")
+    paperweight.paperDevBundle("26.3.build.+")
 
     //Luckyperms
     compileOnly("net.luckperms:api:5.5")

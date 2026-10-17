@@ -52,7 +52,7 @@ public final class ToolItems {
         ItemStack result = CustomItemService.createItemStack(id);
         ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(plugin, id), result);
         recipe.shape("MMM", " S ", " S ");
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(CustomItemService.createItemStack(ingotId)));
+        recipe.setIngredient('M', RecipeChoice.exactChoice(CustomItemService.createItemStack(ingotId)));
         recipe.setIngredient('S', Material.STICK);
         try {
             plugin.getServer().addRecipe(recipe);

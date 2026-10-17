@@ -13,6 +13,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -230,6 +231,22 @@ public class CustomItemService {
             merged.merge(stat, bonus.getValue(), Double::sum);
         }
         return merged;
+    }
+
+
+    /**
+     * Recipe ingredient that accepts ANY instance of the given custom item template,
+     * regardless of upgrades (rarity override, stat bonuses, enchant levels, ...).
+     */
+    public static RecipeChoice templateChoice(String templateId) {
+        ItemStack example = createItemStack(templateId);
+        if (example == null) {
+            throw new IllegalArgumentException("Unknown custom item template: " + templateId);
+        }
+        return RecipeChoice.predicateChoice(
+                stack -> templateId.equals(getTemplateId(stack)),
+                example
+        );
     }
 
     private static List<Component> buildLore(CustomItemTemplate template, CustomItemData data, ItemRarity rarity) {

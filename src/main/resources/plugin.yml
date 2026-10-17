@@ -4,7 +4,7 @@ version: '${version}'
 
 main: me.chaos.eldoriaBase.Main
 paperPluginLoader: me.chaos.eldoriaBase.MainLoader
-api-version: '26.2'
+api-version: '26.3'
 load: POSTWORLD
 
 authors: [ Chaos ]
@@ -41,9 +41,9 @@ commands:
     description: Bank commands
     usage: /bank
 
-  quests:
+  quest:
     description: Quest Menü öffnen
-    usage: /quests
+    usage: /quest
 
   enchantgive:
     description: "Admin: Gibt ein Verzauberungsbuch (Testing, bis Rezepte/Drops existieren)"

@@ -14,7 +14,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,9 +22,9 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.List;
 
 /**
- * The six Sch\u00fcrfer (miner) armor tiers, four pieces each. Every piece carries functional
+ * The six Schürfer (miner) armor tiers, four pieces each. Every piece carries functional
  * mining stats (written to the PDC by CustomItemService -> StatKeyBridge). The Stahl set grants
- * Nachtsicht I with all 4 pieces, the Verst\u00e4rkter-Stahl set already with 2 pieces.
+ * Nachtsicht I with all 4 pieces, the Verstärkter-Stahl set already with 2 pieces.
  * <p>
  * Recipe scheme: each tier is the previous tier's piece in the middle, surrounded by 8 of the
  * tier material (miners = classic bronze armor pattern).
@@ -42,7 +41,7 @@ public final class ArmorItems {
 
     public static void register(JavaPlugin plugin) {
         // tier 1: bronze pattern
-        registerTier(plugin, "miners", "", "Sch\u00fcrfer", ItemRarity.GEWOEHNLICH,
+        registerTier(plugin, "miners", "", "Schürfer", ItemRarity.GEWOEHNLICH,
                 SLOT_MATERIALS_BASE, "bronze", null, 10, 0, 0);
         // tier 2-6: surround previous tier
         registerTier(plugin, "silver_miners", "Silber-", "Silber-Sch\u00fcrfer", ItemRarity.UNGEWOEHNLICH,
@@ -93,8 +92,7 @@ public final class ArmorItems {
                     .displayName(namePrefix + SLOT_NAMES[i])
                     .rarity(rarity)
                     .type(DefaultItemTypes.ARMOR)
-                    .obtain(previousTierId == null
-                            ? ObtainMethod.CRAFTING : ObtainMethod.CRAFTING,
+                    .obtain(ObtainMethod.CRAFTING,
                             previousTierId == null
                                     ? obtainName + "r\u00fcstung (" + materialName(materialKey) + ")"
                                     : obtainName + "r\u00fcstung (" + materialName(materialKey) + " + vorheriges Teil)")
@@ -121,8 +119,8 @@ public final class ArmorItems {
     private static String materialName(String materialKey) {
         return switch (materialKey) {
             case "vanilla:diamond" -> "Diamant";
-            case "reinforced_steel_block" -> "Verst\u00e4rkte Stahlbl\u00f6cke";
-            case "darksteel_block" -> "Dunkelstahlbl\u00f6cke";
+            case "reinforced_steel_block" -> "Verstärkte Stahlblöcke";
+            case "darksteel_block" -> "Dunkelstahlblöcke";
             default -> Character.toUpperCase(materialKey.charAt(0)) + materialKey.substring(1);
         };
     }
@@ -131,7 +129,8 @@ public final class ArmorItems {
         if (materialKey.startsWith("vanilla:")) {
             return new RecipeChoice.MaterialChoice(Material.matchMaterial(materialKey.substring(8)));
         }
-        return new RecipeChoice.ExactChoice(CustomItemService.createItemStack(materialKey));
+
+        return RecipeChoice.exactChoice(List.of(CustomItemService.createItemStack(materialKey)));
     }
 
     private static ShapedRecipe baseArmorRecipe(JavaPlugin plugin, String resultId, String slot, String materialKey) {
@@ -154,7 +153,7 @@ public final class ArmorItems {
                 CustomItemService.createItemStack(resultId));
         recipe.shape("MMM", "MCM", "MMM");
         recipe.setIngredient('M', choiceFor(materialKey));
-        recipe.setIngredient('C', new RecipeChoice.ExactChoice(CustomItemService.createItemStack(centerItemId)));
+        recipe.setIngredient('C', RecipeChoice.exactChoice(CustomItemService.createItemStack(centerItemId)));
         return recipe;
     }
 

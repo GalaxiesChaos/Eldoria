@@ -12,6 +12,7 @@ import me.chaos.EldoriaItems.Command.EldoriaItemCommand;
 import me.chaos.EldoriaItems.EldoriaItemsModule;
 import me.chaos.EldoriaDrops.DropModule;
 import me.chaos.EldoriaDrill.DrillModule;
+import me.chaos.EldoriaNPC.NPCModule;
 import me.chaos.EldoriaForge.ForgeModule;
 import me.chaos.EldoriaForge.data.PlayerForgeData;
 import me.chaos.EldoriaEnchants.Commands.EnchantGiveCommand;
@@ -75,6 +76,8 @@ public final class Main extends JavaPlugin {
         ForgeModule.init(this);
         // NEW: real mining content (materials, tools, armor sets, drill parts, forge recipes, drops)
         MiningContentModule.init(this);
+        // NEW: NPC system (interactable NPCs: dialogue, GUIs, teleports)
+        NPCModule.init(this);
         // NEW: anti-dupe module (keep last: guards the whole plugin, incl. the menus below)
         AntiDupeModule.init(this);
     }
@@ -136,6 +139,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // NEW: persist placed NPC positions before data saves
+        NPCModule.shutdown();
         // NEW: flush the serial-number registry (quarantine/audit trail) before data saves
         AntiDupeModule.shutdown();
         // FIXED: data was only written on quit, so a crash/reload rolled everyone back.

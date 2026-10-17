@@ -25,6 +25,9 @@ permissions:
   eldoria.forge.admin:
     description: "Allows /forge admin (slot management)"
     default: op
+  eldoria.npc.admin:
+    description: "Allows /npc (spawn/remove/list/reload) - NPC admin"
+    default: op
   eldoria.item.admin:
     description: "Allows /eitem (give/list/upgrade of custom items)"
     default: op
@@ -51,3 +54,7 @@ commands:
     description: "Admin: Custom-Items geben/listen/verbessern"
     usage: /eitem <give|list|upgrade>
     permission: eldoria.item.admin
+  npc:
+    description: "Admin: NPCs spawnen/entfernen/verwalten (usage: /npc <spawn|remove|list|reload> [id|all])"
+    usage: /npc <spawn|remove|list|reload> [id|all]
+    permission: eldoria.npc.admin

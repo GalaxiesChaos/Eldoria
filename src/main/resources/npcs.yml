@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------
+# Eldoria NPC definitions
+#
+#   <id>:
+#     name:         Name über dem NPC ('&' Farbcodes)
+#     entity:       Bukkit-EntityType (VILLAGER, WANDERING_TRADER, ENDERMAN, ...)
+#     interaction:  DIALOGUE   -> sendet die 'lines' an den Spieler (Rechtsklick)
+#                   GUI        -> öffnet das unter 'gui:' registrierte Menü
+#                   TELEPORT   -> teleportiert den Spieler (siehe 'teleport:')
+#     gui:          nur bei interaction GUI - registrierte IDs:
+#                   'quests' (Quest-Auswahl), 'bank' (Bank-Menü), 'drill' (Bohrer-Menü)
+#     lines:        nur bei interaction DIALOGUE - eine Zeile pro Chat-Nachricht,
+#                   %player% wird durch den Spielernamen ersetzt
+#     teleport:     nur bei interaction TELEPORT
+#       world:      Bukkit-/Multiverse-Weltname
+#       random:     true  = zufälliger sicherer Punkt innerhalb von 'radius'
+#                   false = Spawnpunkt der Welt (z.B. Plotworld)
+#       radius:     nur bei random: true - Maximalabstand zum Weltspawn
+#
+# Admins spawnen NPCs mit:  /npc spawn <id>
+# ---------------------------------------------------------------------------
+definitions:
+  banker:
+    name: "&6Bankier"
+    entity: VILLAGER
+    interaction: GUI
+    gui: bank
+
+  teleporter:
+    name: "&bTeleporter"
+    entity: ENDERMAN
+    interaction: TELEPORT
+    teleport:
+      world: farmworld
+      random: true
+      radius: 3000
+
+  # Beispiel: fester Teleport zur Plotworld (einfach einkommentieren)
+  # plotworld_teleporter:
+  #   name: "&dPlot Teleporter"
+  #   entity: ENDERMAN
+  #   interaction: TELEPORT
+  #   teleport:
+  #     world: plotworld
+  #     random: false
+
+  greeter:
+    name: "&aHilfreicher Geist"
+    entity: ALLAY
+    interaction: DIALOGUE
+    lines:
+      - "Hallo %player%! Willkommen in Eldoria!"
+
+  drill_engineer:
+    name: "&eBohringenieur"
+    entity: WANDERING_TRADER
+    interaction: GUI
+    gui: drill
